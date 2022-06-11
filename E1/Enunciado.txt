@@ -1,0 +1,51 @@
+Projeto - Enunciado 1
+
+- IVM
+	- Número de série do fabricante (identificador)
+	- Ponto de retalho
+
+- Ponto de retalho
+	- Nome
+	- Morada
+
+- Prateleiras
+	- Número (identificador)
+	- Largura (centímetros)
+	- Altura (centímetros)
+	- Tipo:
+		- Temperatura ambiente
+		- Quente
+		- Frio
+			- Frio positivo
+			- Frio negativo
+
+- Planograma
+	- Prateleira
+	- Número de frentes visíveis de um produto
+	- Número máximo de unidades na prateleira
+
+- Produto
+	- Código EAN (13 dígitos, identificador)
+	- Designação textual
+	- Marca/Nome
+	- Tipo de embalagem (distinguir produtos flexíveis de rígidos)
+	- Categoria (apenas uma por produto)
+
+- Categoria
+	- Nome (identificador)
+	- Tipo de prateleira (opcional)
+	- Categoria Simples
+		- Produtos
+	- Super Categoria
+		- Categorias
+	
+- Retalhista (um por categoria de uma IVM)
+	- TIN (identificador)
+	- Nome
+	- História de eventos de reabastecimento
+
+- Eventos de reabastecimento
+	- Informação do retalhista
+	- Momento em que ocorre
+	- Número de unidades substituídas (não pode exceder as descritas no
+	  planograma)
