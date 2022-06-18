@@ -4,7 +4,7 @@ drop table super_categoria cascade;
 drop table tem_outra cascade;
 drop table produto cascade;
 drop table tem_categoria cascade;
-drop table IVM cascade;
+drop table ivm cascade;
 drop table ponto_de_retalho cascade;
 drop table instalada_em cascade;
 drop table prateleira cascade;
@@ -105,12 +105,11 @@ create table planograma (
 	fabricante		varchar(255) not null,
 	faces			int not null,
 	unidades		int not null,
-	loc				int not null,
+	loc				varchar(255) not null,
 	constraint check_num_prateleira check (num_prateleira >= 0),
 	constraint check_faces check (faces >= 0),
 	constraint check_unidades check (unidades >= 0),
 	constraint check_loc check (loc >= 0),
-	-- FIXME loc eh exatamente o queh
 	constraint pk_planograma primary key(ean, num_prateleira, num_serie, fabricante),
 	constraint pk_planograma_produto foreign key(ean) references produto(ean),
 	constraint pk_planograma_prateleira foreign key(num_prateleira, num_serie, fabricante) references prateleira(num_prateleira, num_serie, fabricante)
@@ -152,6 +151,40 @@ create table evento_reposicao (
 -- Populate Relations
 ----------------------------------------
 
+insert into categoria values ("Congelados");
+insert into categoria values ("Carne");
+insert into categoria values ("Peixe");
+insert into categoria values ("Doces");
+insert into categoria values ("Vegetais");
+insert into categoria values ("Frutas");
+
+insert into categoria_simples values ();
+
+insert into super_categoria values ();
+
+insert into tem_outra values ();
+
+insert into produto values ();
+
+insert into tem_categoria values ();
+
+insert into IVM values ();
+
+insert into ponto_de_retalho values ();
+
+insert into instalada_em values ();
+
+insert into prateleira values ();
+
+insert into planograma values ();
+
+insert into retalhista values ();
+
+insert into responsavel_por values ();
+
+insert into evento_reposicao values ();
+
+
 -- insert into customer values ('Adams',	'Main Street',	'Lisbon');
 -- insert into customer values ('Brown',	'Main Street',	'Oporto');
 -- insert into customer values ('Cook',	'Main Street',	'Lisbon');
@@ -167,7 +200,7 @@ create table evento_reposicao (
 -- insert into customer values ('Nguyen',	'School Street','Castelo Branco');
 -- insert into customer values ('Oliver',	'First Stret',	'Oporto');
 -- insert into customer values ('Parker',	'Hope Street',  'Oporto');
---
+
 -- insert into branch values ('Central',	'Guimarães',		2100000);
 -- insert into branch values ('Clerigos',  'Oporto',		3900000);
 -- insert into branch values ('Downtown',	'Lisbon',		1900000);
@@ -177,7 +210,7 @@ create table evento_reposicao (
 -- insert into branch values ('University',	'Vila Real',	7200000);
 -- insert into branch values ('Uptown',	'Amadora',		1700000);
 -- insert into branch values ('Wine Celar', 'Oporto',		4002800);
---
+
 -- insert into account values ('A-101',	'Downtown',	500);
 -- insert into account values ('A-102',	'Uptown',	700);
 -- insert into account values ('A-201',	'Uptown',	900);
@@ -187,7 +220,7 @@ create table evento_reposicao (
 -- insert into account values ('A-305',	'Round Hill',	800);
 -- insert into account values ('A-333',	'Central',	750);
 -- insert into account values ('A-444',	'Downtown',	850);
---
+
 -- insert into depositor values ('Cook',	 'A-102');
 -- insert into depositor values ('Johnson', 'A-101');
 -- insert into depositor values ('Cook',	 'A-101');
@@ -198,7 +231,7 @@ create table evento_reposicao (
 -- insert into depositor values ('Flores',	 'A-305');
 -- insert into depositor values ('Oliver',  'A-333');
 -- insert into depositor values ('Brown',	 'A-444');
---
+
 -- insert into loan values ('L-11', 'Round Hill',	6000);
 -- insert into loan values ('L-14', 'Downtown',	4000);
 -- insert into loan values ('L-15', 'Uptown',	3000);
@@ -208,7 +241,7 @@ create table evento_reposicao (
 -- insert into loan values ('L-21', 'Central',	9000);
 -- insert into loan values ('L-23', 'Central',	2000);
 -- insert into loan values ('L-93', 'Metro',	5000);
---
+
 -- insert into borrower values ('Brown',	'L-11');
 -- insert into borrower values ('Nguyen',	'L-14');
 -- insert into borrower values ('Cook',	'L-15');
