@@ -13,8 +13,6 @@ drop table retalhista cascade;
 drop table responsavel_por cascade;
 drop table evento_reposicao cascade;
 
--- TODO: CHECK keyword
-
 ----------------------------------------
 -- Table Creation
 ----------------------------------------
@@ -93,6 +91,8 @@ create table prateleira (
 	fabricante		varchar(255) not null,
 	altura			float not null,
 	nome_categoria	varchar(255) not null,
+	constraint check_num_prateleira check (num_prateleira >= 0),
+	constraint check_altura check (altura >= 0),
 	constraint pk_prateleira primary key(num_prateleira, num_serie, fabricante),
 	constraint pk_prateleira_ivm foreign key(num_serie, fabricante) references ivm(num_serie, fabricante),
 	constraint pk_prateleira_categoria foreign key(nome_categoria) references categoria(nome_categoria)
@@ -106,6 +106,11 @@ create table planograma (
 	faces			int not null,
 	unidades		int not null,
 	loc				int not null,
+	constraint check_num_prateleira check (num_prateleira >= 0),
+	constraint check_faces check (faces >= 0),
+	constraint check_unidades check (unidades >= 0),
+	constraint check_loc check (loc >= 0),
+	-- FIXME loc eh exatamente o queh
 	constraint pk_planograma primary key(ean, num_prateleira, num_serie, fabricante),
 	constraint pk_planograma_produto foreign key(ean) references produto(ean),
 	constraint pk_planograma_prateleira foreign key(num_prateleira, num_serie, fabricante) references prateleira(num_prateleira, num_serie, fabricante)
@@ -136,6 +141,8 @@ create table evento_reposicao (
 	instante		timestamp not null,
 	unidades		int not null,
 	tin				varchar(255) not null,
+	constraint check_num_prateleira check (num_prateleira >= 0),
+	constraint check_unidades check (unidades >= 0),
 	constraint pk_evento_reposicao primary key(ean, num_prateleira, num_serie, fabricante, instante),
 	constraint pk_evento_reposicao_planograma foreign key(ean, num_prateleira, num_serie, fabricante) references planograma(ean, num_prateleira, num_serie, fabricante),
 	constraint pk_evento_reposicao_retalhista foreign key(tin) references retalhista(tin)
