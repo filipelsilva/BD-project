@@ -13,6 +13,8 @@ drop table retalhista cascade;
 drop table responsavel_por cascade;
 drop table evento_reposicao cascade;
 
+-- TODO: CHECK keyword
+
 ----------------------------------------
 -- Table Creation
 ----------------------------------------
@@ -81,7 +83,7 @@ create table instalada_em (
 	fabricante	varchar(255) not null,
 	local		varchar(255) not null,
 	constraint pk_instalada_em primary key(num_serie, fabricante),
-	constraint fk_instalada_em_ivm foreign key(num_serie, fabricante) references ivm(num_serie, fabricante), -- TODO can we do this?
+	constraint fk_instalada_em_ivm foreign key(num_serie, fabricante) references ivm(num_serie, fabricante),
 	constraint fk_instalada_em_ponto_de_retalho foreign key(local) references ponto_de_retalho(nome_ponto_de_retalho)
 );
 
