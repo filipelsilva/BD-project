@@ -13,9 +13,9 @@ drop table retalhista cascade;
 drop table responsavel_por cascade;
 drop table evento_reposicao cascade;
 
-----------------------------------------
+--------------------------------------------------------------------------------
 -- Table Creation
-----------------------------------------
+--------------------------------------------------------------------------------
 
 -- Named constraints are global to the database.
 -- Therefore the following use the following naming rules:
@@ -109,7 +109,6 @@ create table planograma (
 	constraint check_num_prateleira check (num_prateleira >= 0),
 	constraint check_faces check (faces >= 0),
 	constraint check_unidades check (unidades >= 0),
-	constraint check_loc check (loc >= 0),
 	constraint pk_planograma primary key(ean, num_prateleira, num_serie, fabricante),
 	constraint pk_planograma_produto foreign key(ean) references produto(ean),
 	constraint pk_planograma_prateleira foreign key(num_prateleira, num_serie, fabricante) references prateleira(num_prateleira, num_serie, fabricante)
@@ -147,108 +146,83 @@ create table evento_reposicao (
 	constraint pk_evento_reposicao_retalhista foreign key(tin) references retalhista(tin)
 );
 
-----------------------------------------
+--------------------------------------------------------------------------------
 -- Populate Relations
-----------------------------------------
+--------------------------------------------------------------------------------
 
-insert into categoria values ("Congelados");
-insert into categoria values ("Carne");
-insert into categoria values ("Peixe");
-insert into categoria values ("Doces");
-insert into categoria values ("Vegetais");
-insert into categoria values ("Frutas");
+insert into categoria values ('Congelados');
+insert into categoria values ('Laticinios');
+insert into categoria values ('Iogurtes');
+insert into categoria values ('Queijos');
+insert into categoria values ('Manteigas');
+insert into categoria values ('Carne');
+insert into categoria values ('Peixe');
+insert into categoria values ('Doces');
+insert into categoria values ('Vegetais');
+insert into categoria values ('Frutas');
 
-insert into categoria_simples values ();
+insert into categoria_simples values ('Congelados');
+insert into categoria_simples values ('Iogurtes');
+insert into categoria_simples values ('Queijos');
+insert into categoria_simples values ('Manteigas');
+insert into categoria_simples values ('Carne');
+insert into categoria_simples values ('Peixe');
+insert into categoria_simples values ('Doces');
+insert into categoria_simples values ('Vegetais');
+insert into categoria_simples values ('Frutas');
 
-insert into super_categoria values ();
+insert into super_categoria values ('Laticinios');
 
-insert into tem_outra values ();
+insert into tem_outra values ('Laticinios', 'Iogurtes');
+insert into tem_outra values ('Laticinios', 'Queijos');
+insert into tem_outra values ('Laticinios', 'Manteigas');
 
-insert into produto values ();
+insert into produto values ('0000000000000', 'Iogurtes', 'Mimosa');
+insert into produto values ('0000000000001', 'Queijos', 'Babybel');
+insert into produto values ('0000000000002', 'Manteigas', 'Becel');
+insert into produto values ('0000000000003', 'Frutas', 'Banana');
 
-insert into tem_categoria values ();
+insert into tem_categoria values ('0000000000000', 'Iogurtes');
+insert into tem_categoria values ('0000000000001', 'Queijos');
+insert into tem_categoria values ('0000000000002', 'Manteigas');
+insert into tem_categoria values ('0000000000003', 'Frutas');
 
-insert into IVM values ();
+insert into ivm values ('ivm0', 'Bosch');
+insert into ivm values ('ivm1', 'Apple');
+insert into ivm values ('ivm2', 'Marca1');
+insert into ivm values ('ivm3', 'Marca2');
 
-insert into ponto_de_retalho values ();
+insert into ponto_de_retalho values ('Restaurante0', 'Leiria', 'Batalha');
+insert into ponto_de_retalho values ('Restaurante1', 'Leiria', 'Leiria');
+insert into ponto_de_retalho values ('Restaurante2', 'Leiria', 'Marinha Grande');
+insert into ponto_de_retalho values ('Restaurante3', 'Leiria', 'Caldas da Rainha');
+insert into ponto_de_retalho values ('Restaurante4', 'Leiria', 'Pombal');
 
-insert into instalada_em values ();
+insert into instalada_em values ('ivm0', 'Bosch', 'Restaurante0');
+insert into instalada_em values ('ivm1', 'Apple', 'Restaurante1');
+insert into instalada_em values ('ivm2', 'Marca1', 'Restaurante2');
+insert into instalada_em values ('ivm3', 'Marca2', 'Restaurante3');
 
-insert into prateleira values ();
+insert into prateleira values ('0', 'ivm0', 'Bosch', '10.5', 'Iogurtes');
+insert into prateleira values ('1', 'ivm1', 'Apple', '09.5', 'Queijos');
+insert into prateleira values ('2', 'ivm2', 'Marca1', '11.5', 'Manteigas');
+insert into prateleira values ('3', 'ivm3', 'Marca2', '08.5', 'Frutas');
 
-insert into planograma values ();
+insert into planograma values ('0000000000000', '0', 'ivm0', 'Bosch', '1', '2', 'ns1');
+insert into planograma values ('0000000000001', '1', 'ivm1', 'Apple', '2', '3', 'ns2');
+insert into planograma values ('0000000000002', '2', 'ivm2', 'Marca1', '3', '4', 'ns3');
+insert into planograma values ('0000000000003', '3', 'ivm3', 'Marca2', '4', '5', 'ns4');
 
-insert into retalhista values ();
+insert into retalhista values ('1', 'Jorge');
+insert into retalhista values ('2', 'Bruno');
+insert into retalhista values ('3', 'Alexandra');
 
-insert into responsavel_por values ();
+insert into responsavel_por values ('Iogurtes', '1', 'ivm0', 'Bosch');
+insert into responsavel_por values ('Queijos', '2', 'ivm1', 'Apple');
+insert into responsavel_por values ('Manteigas', '2', 'ivm2', 'Marca1');
+insert into responsavel_por values ('Frutas', '3', 'ivm3', 'Marca2');
 
-insert into evento_reposicao values ();
-
-
--- insert into customer values ('Adams',	'Main Street',	'Lisbon');
--- insert into customer values ('Brown',	'Main Street',	'Oporto');
--- insert into customer values ('Cook',	'Main Street',	'Lisbon');
--- insert into customer values ('Davis',	'Church Street','Oporto');
--- insert into customer values ('Evans',	'Forest Street','Coimbra');
--- insert into customer values ('Flores',	'Station Street','Braga');
--- insert into customer values ('Gonzalez','Sunny Street', 'Faro');
--- insert into customer values ('Iacocca',	'Spring Steet',	'Coimbra');
--- insert into customer values ('Johnson',	'New Street',	'Cascais');
--- insert into customer values ('King',	'Garden Street','Aveiro');
--- insert into customer values ('Lopez',	'Grand Street',	'Vila Real');
--- insert into customer values ('Martin',	'Royal Street',	'Braga');
--- insert into customer values ('Nguyen',	'School Street','Castelo Branco');
--- insert into customer values ('Oliver',	'First Stret',	'Oporto');
--- insert into customer values ('Parker',	'Hope Street',  'Oporto');
-
--- insert into branch values ('Central',	'Guimarães',		2100000);
--- insert into branch values ('Clerigos',  'Oporto',		3900000);
--- insert into branch values ('Downtown',	'Lisbon',		1900000);
--- insert into branch values ('Metro',	'Amadora',	 	400200);
--- insert into branch values ('Round Hill','Amadora',		8000000);
--- insert into branch values ('Ship Terminal', 'Sintra',	 	0400000);
--- insert into branch values ('University',	'Vila Real',	7200000);
--- insert into branch values ('Uptown',	'Amadora',		1700000);
--- insert into branch values ('Wine Celar', 'Oporto',		4002800);
-
--- insert into account values ('A-101',	'Downtown',	500);
--- insert into account values ('A-102',	'Uptown',	700);
--- insert into account values ('A-201',	'Uptown',	900);
--- insert into account values ('A-215',	'Metro',	600);
--- insert into account values ('A-217',	'University',	650);
--- insert into account values ('A-222',	'Central',	550);
--- insert into account values ('A-305',	'Round Hill',	800);
--- insert into account values ('A-333',	'Central',	750);
--- insert into account values ('A-444',	'Downtown',	850);
-
--- insert into depositor values ('Cook',	 'A-102');
--- insert into depositor values ('Johnson', 'A-101');
--- insert into depositor values ('Cook',	 'A-101');
--- insert into depositor values ('Johnson', 'A-201');
--- insert into depositor values ('Brown',	 'A-215');
--- insert into depositor values ('Iacocca', 'A-217');
--- insert into depositor values ('Evans',   'A-222');
--- insert into depositor values ('Flores',	 'A-305');
--- insert into depositor values ('Oliver',  'A-333');
--- insert into depositor values ('Brown',	 'A-444');
-
--- insert into loan values ('L-11', 'Round Hill',	6000);
--- insert into loan values ('L-14', 'Downtown',	4000);
--- insert into loan values ('L-15', 'Uptown',	3000);
--- insert into loan values ('L-16', 'Uptown',	7000);
--- insert into loan values ('L-17', 'Downtown',	1000);
--- insert into loan values ('L-20', 'Downtown',	8000);
--- insert into loan values ('L-21', 'Central',	9000);
--- insert into loan values ('L-23', 'Central',	2000);
--- insert into loan values ('L-93', 'Metro',	5000);
-
--- insert into borrower values ('Brown',	'L-11');
--- insert into borrower values ('Nguyen',	'L-14');
--- insert into borrower values ('Cook',	'L-15');
--- insert into borrower values ('Iacocca',	'L-16');
--- insert into borrower values ('Gonzalez','L-17');
--- insert into borrower values ('Iacocca',	'L-17');
--- insert into borrower values ('Parker',	'L-20');
--- insert into borrower values ('Brown',	'L-21');
--- insert into borrower values ('Brown',	'L-23');
--- insert into borrower values ('Davis',	'L-93');
+insert into evento_reposicao values ('0000000000000', '0', 'ivm0', 'Bosch', current_timestamp, '10', '1');
+insert into evento_reposicao values ('0000000000001', '1', 'ivm1', 'Apple', current_timestamp, '11', '1');
+insert into evento_reposicao values ('0000000000002', '2', 'ivm2', 'Marca1', current_timestamp, '12', '2');
+insert into evento_reposicao values ('0000000000003', '3', 'ivm3', 'Marca2', current_timestamp, '13', '3');
