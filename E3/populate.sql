@@ -177,15 +177,15 @@ insert into tem_outra values ('Laticinios', 'Iogurtes');
 insert into tem_outra values ('Laticinios', 'Queijos');
 insert into tem_outra values ('Laticinios', 'Manteigas');
 
-insert into produto values ('0000000000000', 'Iogurtes', 'Mimosa');
-insert into produto values ('0000000000001', 'Queijos', 'Babybel');
-insert into produto values ('0000000000002', 'Manteigas', 'Becel');
-insert into produto values ('0000000000003', 'Frutas', 'Banana');
+insert into produto values ('0', 'Iogurtes', 'Mimosa');
+insert into produto values ('1', 'Queijos', 'Babybel');
+insert into produto values ('2', 'Manteigas', 'Becel');
+insert into produto values ('3', 'Frutas', 'Banana');
 
-insert into tem_categoria values ('0000000000000', 'Iogurtes');
-insert into tem_categoria values ('0000000000001', 'Queijos');
-insert into tem_categoria values ('0000000000002', 'Manteigas');
-insert into tem_categoria values ('0000000000003', 'Frutas');
+insert into tem_categoria values ('0', 'Iogurtes');
+insert into tem_categoria values ('1', 'Queijos');
+insert into tem_categoria values ('2', 'Manteigas');
+insert into tem_categoria values ('3', 'Frutas');
 
 insert into ivm values ('ivm0', 'Bosch');
 insert into ivm values ('ivm1', 'Apple');
@@ -208,10 +208,10 @@ insert into prateleira values ('1', 'ivm1', 'Apple', '09.5', 'Queijos');
 insert into prateleira values ('2', 'ivm2', 'Marca1', '11.5', 'Manteigas');
 insert into prateleira values ('3', 'ivm3', 'Marca2', '08.5', 'Frutas');
 
-insert into planograma values ('0000000000000', '0', 'ivm0', 'Bosch', '1', '2', 'ns1');
-insert into planograma values ('0000000000001', '1', 'ivm1', 'Apple', '2', '3', 'ns2');
-insert into planograma values ('0000000000002', '2', 'ivm2', 'Marca1', '3', '4', 'ns3');
-insert into planograma values ('0000000000003', '3', 'ivm3', 'Marca2', '4', '5', 'ns4');
+insert into planograma values ('0', '0', 'ivm0', 'Bosch', '1', '2', 'ns1');
+insert into planograma values ('1', '1', 'ivm1', 'Apple', '2', '3', 'ns2');
+insert into planograma values ('2', '2', 'ivm2', 'Marca1', '3', '4', 'ns3');
+insert into planograma values ('3', '3', 'ivm3', 'Marca2', '4', '5', 'ns4');
 
 insert into retalhista values ('1', 'Jorge');
 insert into retalhista values ('2', 'Bruno');
@@ -222,7 +222,7 @@ insert into responsavel_por values ('Queijos', '2', 'ivm1', 'Apple');
 insert into responsavel_por values ('Manteigas', '2', 'ivm2', 'Marca1');
 insert into responsavel_por values ('Frutas', '3', 'ivm3', 'Marca2');
 
-insert into evento_reposicao values ('0000000000000', '0', 'ivm0', 'Bosch', current_timestamp, '10', '1');
-insert into evento_reposicao values ('0000000000001', '1', 'ivm1', 'Apple', current_timestamp, '11', '1');
-insert into evento_reposicao values ('0000000000002', '2', 'ivm2', 'Marca1', current_timestamp, '12', '2');
-insert into evento_reposicao values ('0000000000003', '3', 'ivm3', 'Marca2', current_timestamp, '13', '3');
+insert into evento_reposicao values ('0', '0', 'ivm0', 'Bosch', to_timestamp('2020-02-04 06:45', 'YYYY-MM-DD HH24:MI'), '10', '1');
+insert into evento_reposicao values ('1', '1', 'ivm1', 'Apple', to_timestamp('2020-03-31 14:21', 'YYYY-MM-DD HH24:MI'), '11', '1');
+insert into evento_reposicao values ('2', '2', 'ivm2', 'Marca1', to_timestamp('2020-05-13 17:29', 'YYYY-MM-DD HH24:MI'), '12', '2');
+insert into evento_reposicao values ('3', '3', 'ivm3', 'Marca2', to_timestamp('2020-10-07 21:35', 'YYYY-MM-DD HH24:MI'), '13', '3');
