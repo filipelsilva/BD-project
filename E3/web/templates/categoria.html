@@ -16,16 +16,11 @@
 				{% for record in cursor %}
 				<tr>
 					<td>{{ record[0] }}</td>
-                    <td><a href="remover_categoria?nome_categoria={{ record[0] }}">Remover</a></td>
+					<td><a href="remover_categoria?nome_categoria={{ record[0] }}">Remover</a></td>
 				</tr>
 				{% endfor %}
 			</tbody>
 		</table>
-        <h3>Adicionar categoria</h3>
-        <form action="adicionar_categoria" method="post">
-            <p>Nome: <input type="text" name="nome_categoria"/></p>
-            <p><input type="submit" value="Submit"/></p>
-        </form>
 		{% else %}
 		<p> Erro: ao obter dados da base de dados!</p>
 		{% endif %}

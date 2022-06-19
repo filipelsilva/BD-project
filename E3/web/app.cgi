@@ -45,7 +45,7 @@ def list_categoria():
 		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
 		query = "select * from categoria;"
 		cursor.execute(query)
-		return render_template("categoria.html", cursor = cursor, params = request.args)
+		return render_template("categoria.html", cursor = cursor)
 	except Exception as e:
 		return str(e)
 	finally:
@@ -61,7 +61,7 @@ def list_categoria_simples():
 		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
 		query = "select * from categoria_simples;"
 		cursor.execute(query)
-		return render_template("categoria_simples.html", cursor = cursor, params = request.args)
+		return render_template("categoria_simples.html", cursor = cursor)
 	except Exception as e:
 		return str(e)
 	finally:
@@ -267,10 +267,16 @@ def adicionar_categoria():
 	try:
 		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
 		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+		tipo_categoria = request.form["tipo_categoria"]
 		nome_categoria = request.form["nome_categoria"]
-		query = "insert into categoria values ('%s')"
-		data = (nome_categoria)
+		query = "insert into categoria values (%s)"
+		if (tipo_categoria == "simples"):
+			query2 = "insert into categoria_simples values (%s)"
+		else:
+			query2 = "insert into super_categoria values (%s)"
+		data = (nome_categoria,)
 		cursor.execute(query, data)
+		cursor.execute(query2, data)
 		return query
 	except Exception as e:
 		return str(e)
@@ -286,10 +292,10 @@ def remover_categoria():
 	try:
 		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
 		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-		nome_categoria = request.form["nome_categoria"]
-		# TODO query
-		query = "UPDATE account SET balance = %s WHERE account_number = %s"
-		data = (nome_categoria)
+		params = request.args
+		nome_categoria = params.get("nome_categoria")
+		query = "delete from categoria where name_categoria = %s"
+		data = (nome_categoria,)
 		cursor.execute(query, data)
 		return query
 	except Exception as e:

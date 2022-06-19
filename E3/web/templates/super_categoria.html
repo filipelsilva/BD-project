@@ -20,6 +20,12 @@
 				{% endfor %}
 			</tbody>
 		</table>
+		<h3>Adicionar categoria</h3>
+		<form action="adicionar_categoria" method="post">
+            <p><input type="hidden" name="tipo_categoria" value="super"/></p>
+			<p>Nome: <input type="text" name="nome_categoria"/></p>
+			<p><input type="submit" value="Submit"/></p>
+		</form>
 		{% else %}
 		<p> Erro: ao obter dados da base de dados!</p>
 		{% endif %}
