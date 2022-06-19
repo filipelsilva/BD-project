@@ -40,10 +40,10 @@ create table super_categoria (
 );
 
 create table tem_outra (
-	super_nome_categoria	varchar(255) not null,
+	nome_super_categoria	varchar(255) not null,
 	nome_categoria			varchar(255) not null,
 	constraint pk_tem_outra primary key(nome_categoria),
-	constraint fk_tem_outra_super_categoria foreign key(super_nome_categoria) references super_categoria(nome_categoria),
+	constraint fk_tem_outra_super_categoria foreign key(nome_super_categoria) references super_categoria(nome_categoria),
 	constraint fk_tem_outra_categoria foreign key(nome_categoria) references categoria(nome_categoria)
 );
 

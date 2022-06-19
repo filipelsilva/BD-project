@@ -19,21 +19,21 @@ DB_CONNECTION_STRING = "host = %s dbname = %s user = %s password = %s" % (
 
 app = Flask(__name__)
 
-@app.route("/")
-def list_accounts():
-    dbConn = None
-    cursor = None
-    try:
-        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
-        cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-        query = "select * from categoria;"
-        cursor.execute(query)
-        return render_template("index.html", cursor = cursor)
-    except Exception as e:
-        return str(e)  # Renders a page with the error.
-    finally:
-        cursor.close()
-        dbConn.close()
+# @app.route("/")
+# def list_accounts():
+#     dbConn = None
+#     cursor = None
+#     try:
+#         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+#         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+#         query = "select * from categoria;"
+#         cursor.execute(query)
+#         return render_template("index.html", cursor = cursor)
+#     except Exception as e:
+#         return str(e)  # Renders a page with the error.
+#     finally:
+#         cursor.close()
+#         dbConn.close()
 
 @app.route("/categoria")
 def list_categoria():
