@@ -24,7 +24,7 @@
 		<h3>Adicionar categoria</h3>
 		<form action="adicionar_categoria" method="post">
 			<p><input type="hidden" name="tipo_categoria" value="super"/></p>
-			<p>Nome: <input type="text" name="nome_categoria"/></p>
+			<p>Nome: <input type="text" name="nome_categoria" required/></p>
 			<p><input type="submit" value="Submit"/></p>
 		</form>
 		{% else %}
