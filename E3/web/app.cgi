@@ -297,13 +297,13 @@ def remover_categoria():
 		tipo_categoria = params.get("tipo_categoria")
 		data = (nome_categoria,)
 		queries = []
+		queries += ["delete from tem_outra where nome_super_categoria = %s;",]
+		queries += ["delete from tem_outra where nome_categoria = %s;",]
 		if (tipo_categoria == "super"):
-			queries += ["delete from tem_outra where nome_super_categoria = %s;",]
 			queries += ["delete from super_categoria where nome_categoria = %s;",]
 		else:
 			queries += ["delete from tem_categoria where nome_categoria = %s;",]
 			queries += ["delete from produto where nome_categoria = %s;",]
-			queries += ["delete from tem_outra where nome_categoria = %s;",]
 			queries += ["delete from categoria_simples where nome_categoria = %s;",]
 		queries += ["delete from categoria where nome_categoria = %s;",]
 		for query in queries:
