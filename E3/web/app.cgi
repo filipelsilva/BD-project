@@ -44,7 +44,7 @@ def list_categoria():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from categoria;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("categoria.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
@@ -60,7 +60,7 @@ def list_categoria_simples():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from categoria_simples;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("categoria_simples.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
@@ -76,7 +76,7 @@ def list_super_categoria():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from super_categoria;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("super_categoria.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
@@ -92,7 +92,7 @@ def list_tem_outra():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from tem_outra;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("tem_outra.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
@@ -108,7 +108,7 @@ def list_produto():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from produto;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("produto.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
@@ -124,7 +124,7 @@ def list_tem_categoria():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from tem_categoria;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("tem_categoria.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
@@ -140,7 +140,7 @@ def list_ivm():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from ivm;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("ivm.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
@@ -156,7 +156,7 @@ def list_ponto_de_retalho():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from ponto_de_retalho;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("ponto_de_retalho.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
@@ -172,7 +172,7 @@ def list_instalada_em():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from instalada_em;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("instalada_em.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
@@ -188,7 +188,7 @@ def list_prateleira():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from prateleira;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("prateleira.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
@@ -204,7 +204,7 @@ def list_planograma():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from planograma;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("planograma.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
@@ -220,7 +220,7 @@ def list_retalhista():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from retalhista;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("retalhista.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
@@ -236,7 +236,7 @@ def list_responsavel_por():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from responsavel_por;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("responsavel_por.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
@@ -252,7 +252,7 @@ def list_evento_reposicao():
         cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
         query = "select * from evento_reposicao;"
         cursor.execute(query)
-        return render_template("accounts.html", cursor = cursor)
+        return render_template("evento_reposicao.html", cursor = cursor)
     except Exception as e:
         return str(e)
     finally:
