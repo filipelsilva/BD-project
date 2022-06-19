@@ -294,7 +294,7 @@ def remover_categoria():
 		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
 		params = request.args
 		nome_categoria = params.get("nome_categoria")
-		tipo_categoria = request.form["tipo_categoria"]
+		tipo_categoria = params.get("tipo_categoria")
 		if (tipo_categoria == "super"):
 			query1 = "delete from tem_outra where nome_super_categoria = %s;"
 			query2 = "delete from super_categoria where nome_categoria = %s;"
