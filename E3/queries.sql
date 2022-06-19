@@ -1,3 +1,8 @@
+----------------------------
+--         3. SQL         -- 
+----------------------------
+
+
 -- Qual o nome do retalhista (ou retalhistas) responsaveis pela reposicao do maior numero de
 -- categorias? 
 
@@ -43,3 +48,27 @@ where not exists(
     where a.tin = b.tin
 )
 ;
+
+
+
+----------------------------
+--        6. OLAP         -- 
+----------------------------
+
+-- 1. num dado periodo (i.e. entre duas datas), por dia da semana, por concelho e no total
+-- TODO: falta periodo de tempo. nao sei como fazer com datas desconhecidas
+select dia_semana, conselho, SUM(unidades) as total
+from Vendas
+group by 
+    CUBE(dia_semana,conselho);
+
+-- 2. num dado distrito (i.e. "Lisboa"), por concelho, categoria, dia da semana e no total
+-- TODO: nao sei se posso ter um where antes do group by
+-- secalhar eh um HAVING depois do group by
+-- update: eles fazem isso no ponto 7. do enunciado, por isso acho que eh okay
+select conselho, cat, dia_semana, SUM(unidades) as total
+from Vendas
+where distrito = "Lisboa"
+group by
+    CUBE(conselho, cat, dia_semana);
+
