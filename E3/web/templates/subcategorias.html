@@ -10,6 +10,7 @@
 			<h1>Subcategorias da categoria: {{ params.get("nome_categoria") }}</h1>
 			<thead>
 				<tr>
+					<th>nome_super_categoria</th>
 					<th>nome_categoria</th>
 				</tr>
 			</thead>
@@ -17,6 +18,8 @@
 				{% for record in cursor %}
 				<tr>
 					<td>{{ record[0] }}</td>
+					<td>{{ record[1] }}</td>
+					<td><a href="subcategorias?nome_categoria={{ record[1] }}">Subcategorias de {{ record[1] }}</a></td>
 				</tr>
 				{% endfor %}
 			</tbody>

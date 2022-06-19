@@ -380,18 +380,18 @@ def list_evento_reposicao_ivm():
 		dbConn.close()
 
 @app.route("/subcategorias")
-def list_evento_reposicao_ivm():
+def subcategorias():
 	dbConn = None
 	cursor = None
 	try:
 		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
 		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
 		params = request.args
-		num_serie = params.get("num_serie")
-		data = (num_serie,)
-		query = "select * from evento_reposicao where num_serie = %s;"
+		nome_categoria = params.get("nome_categoria")
+		data = (nome_categoria,)
+		query = "select * from tem_outra where nome_super_categoria = %s;"
 		cursor.execute(query, data)
-		return render_template("evento_reposicao_ivm.html", cursor = cursor, params = request.args)
+		return render_template("subcategorias.html", cursor = cursor, params = request.args)
 	except Exception as e:
 		return str(e)
 	finally:
