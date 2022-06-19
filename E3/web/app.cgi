@@ -45,7 +45,7 @@ def list_categoria():
 		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
 		query = "select * from categoria;"
 		cursor.execute(query)
-		return render_template("categoria.html", cursor = cursor)
+		return render_template("categoria.html", cursor = cursor, params = request.args)
 	except Exception as e:
 		return str(e)
 	finally:
@@ -61,7 +61,7 @@ def list_categoria_simples():
 		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
 		query = "select * from categoria_simples;"
 		cursor.execute(query)
-		return render_template("categoria_simples.html", cursor = cursor)
+		return render_template("categoria_simples.html", cursor = cursor, params = request.args)
 	except Exception as e:
 		return str(e)
 	finally:
@@ -257,6 +257,45 @@ def list_evento_reposicao():
 	except Exception as e:
 		return str(e)
 	finally:
+		cursor.close()
+		dbConn.close()
+
+@app.route("/adicionar_categoria", methods = ["POST"])
+def adicionar_categoria():
+	dbConn = None
+	cursor = None
+	try:
+		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+		nome_categoria = request.form["nome_categoria"]
+		query = "insert into categoria values ('%s')"
+		data = (nome_categoria)
+		cursor.execute(query, data)
+		return query
+	except Exception as e:
+		return str(e)
+	finally:
+		dbConn.commit()
+		cursor.close()
+		dbConn.close()
+
+@app.route("/remover_categoria", methods = ["POST"])
+def remover_categoria():
+	dbConn = None
+	cursor = None
+	try:
+		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+		nome_categoria = request.form["nome_categoria"]
+		# TODO query
+		query = "UPDATE account SET balance = %s WHERE account_number = %s"
+		data = (nome_categoria)
+		cursor.execute(query, data)
+		return query
+	except Exception as e:
+		return str(e)
+	finally:
+		dbConn.commit()
 		cursor.close()
 		dbConn.close()
 
