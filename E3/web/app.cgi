@@ -269,12 +269,12 @@ def adicionar_categoria():
 		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
 		nome_categoria = request.form["nome_categoria"]
 		tipo_categoria = request.form["tipo_categoria"]
+		data = (nome_categoria,)
 		query = "insert into categoria values (%s)"
 		if (tipo_categoria == "simples"):
 			query2 = "insert into categoria_simples values (%s);"
 		else:
 			query2 = "insert into super_categoria values (%s);"
-		data = (nome_categoria,)
 		cursor.execute(query, data)
 		cursor.execute(query2, data)
 		return query2
@@ -285,7 +285,7 @@ def adicionar_categoria():
 		cursor.close()
 		dbConn.close()
 
-@app.route("/remover_categoria", methods = ["POST"])
+@app.route("/remover_categoria")
 def remover_categoria():
 	dbConn = None
 	cursor = None
@@ -295,14 +295,16 @@ def remover_categoria():
 		params = request.args
 		nome_categoria = params.get("nome_categoria")
 		tipo_categoria = params.get("tipo_categoria")
+		data = (nome_categoria,)
 		if (tipo_categoria == "super"):
 			query1 = "delete from tem_outra where nome_super_categoria = %s;"
 			query2 = "delete from super_categoria where nome_categoria = %s;"
 		else:
+			cursor.execute("delete from tem_categoria where nome_categoria = %s", data)
+			cursor.execute("delete from produto where nome_categoria = %s", data)
 			query1 = "delete from tem_outra where nome_categoria = %s;"
 			query2 = "delete from categoria_simples where nome_categoria = %s;"
 		query3 = "delete from categoria where nome_categoria = %s;"
-		data = (nome_categoria,)
 		cursor.execute(query1, data)
 		cursor.execute(query2, data)
 		cursor.execute(query3, data)
