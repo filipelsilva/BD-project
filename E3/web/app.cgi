@@ -336,4 +336,28 @@ def adicionar_retalhista():
 		cursor.close()
 		dbConn.close()
 
+@app.route("/remover_retalhista")
+def remover_retalhista():
+	dbConn = None
+	cursor = None
+	try:
+		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+		params = request.args
+		tin = params.get("tin")
+		data = (tin,)
+		queries = []
+		queries += ["delete from responsavel_por where tin = %s",]
+		queries += ["delete from evento_reposicao where tin = %s",]
+		queries += ["delete from retalhista where tin = %s",]
+		for query in queries:
+			cursor.execute(query, data)
+		return queries[-1]
+	except Exception as e:
+		return str(e)
+	finally:
+		dbConn.commit()
+		cursor.close()
+		dbConn.close()
+
 CGIHandler().run(app)
