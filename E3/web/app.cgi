@@ -267,17 +267,17 @@ def adicionar_categoria():
 	try:
 		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
 		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-		tipo_categoria = request.form["tipo_categoria"]
 		nome_categoria = request.form["nome_categoria"]
+		tipo_categoria = request.form["tipo_categoria"]
 		query = "insert into categoria values (%s)"
 		if (tipo_categoria == "simples"):
-			query2 = "insert into categoria_simples values (%s)"
+			query2 = "insert into categoria_simples values (%s);"
 		else:
-			query2 = "insert into super_categoria values (%s)"
+			query2 = "insert into super_categoria values (%s);"
 		data = (nome_categoria,)
 		cursor.execute(query, data)
 		cursor.execute(query2, data)
-		return query
+		return query2
 	except Exception as e:
 		return str(e)
 	finally:
@@ -294,54 +294,19 @@ def remover_categoria():
 		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
 		params = request.args
 		nome_categoria = params.get("nome_categoria")
-		query = "delete from categoria where name_categoria = %s"
+		tipo_categoria = request.form["tipo_categoria"]
+		if (tipo_categoria == "super"):
+			query1 = "delete from tem_outra where nome_super_categoria = %s;"
+			query2 = "delete from super_categoria where nome_categoria = %s;"
+		else:
+			query1 = "delete from tem_outra where nome_categoria = %s;"
+			query2 = "delete from categoria_simples where nome_categoria = %s;"
+		query3 = "delete from categoria where nome_categoria = %s;"
 		data = (nome_categoria,)
-		cursor.execute(query, data)
-		return query
-	except Exception as e:
-		return str(e)
-	finally:
-		dbConn.commit()
-		cursor.close()
-		dbConn.close()
-
-# old stuff
-@app.route("/accounts")
-def list_accounts_edit():
-	dbConn = None
-	cursor = None
-	try:
-		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
-		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-		query = "SELECT account_number, branch_name, balance FROM account;"
-		cursor.execute(query)
-		return render_template("accounts.html", cursor = cursor)
-	except Exception as e:
-		return str(e)
-	finally:
-		cursor.close()
-		dbConn.close()
-
-@app.route("/balance")
-def change_balance():
-	try:
-		return render_template("balance.html", params = request.args)
-	except Exception as e:
-		return str(e)
-
-@app.route("/update", methods = ["POST"])
-def update_balance():
-	dbConn = None
-	cursor = None
-	try:
-		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
-		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-		balance = request.form["balance"]
-		account_number = request.form["account_number"]
-		query = "UPDATE account SET balance = %s WHERE account_number = %s"
-		data = (balance, account_number)
-		cursor.execute(query, data)
-		return query
+		cursor.execute(query1, data)
+		cursor.execute(query2, data)
+		cursor.execute(query3, data)
+		return query3
 	except Exception as e:
 		return str(e)
 	finally:
