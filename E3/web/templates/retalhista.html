@@ -18,10 +18,17 @@
 				<tr>
 					<td>{{ record[0] }}</td>
 					<td>{{ record[1] }}</td>
+					<td><a href="remover_retalhista?nome_retalhista={{ record[1] }}">Remover</a></td>
 				</tr>
 				{% endfor %}
 			</tbody>
 		</table>
+		<h3>Adicionar retalhista</h3>
+		<form action="adicionar_retalhista" method="post">
+			<p>TIN: <input type="text" name="tin"/></p>
+			<p>Nome: <input type="text" name="nome_retalhista"/></p>
+			<p><input type="submit" value="Submit"/></p>
+		</form>
 		{% else %}
 		<p> Erro: ao obter dados da base de dados!</p>
 		{% endif %}

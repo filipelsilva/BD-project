@@ -270,14 +270,14 @@ def adicionar_categoria():
 		nome_categoria = request.form["nome_categoria"]
 		tipo_categoria = request.form["tipo_categoria"]
 		data = (nome_categoria,)
-		query = "insert into categoria values (%s)"
+		queries = ["insert into categoria values (%s)",]
 		if (tipo_categoria == "simples"):
-			query2 = "insert into categoria_simples values (%s);"
+			queries += ["insert into categoria_simples values (%s);",]
 		else:
-			query2 = "insert into super_categoria values (%s);"
-		cursor.execute(query, data)
-		cursor.execute(query2, data)
-		return query2
+			queries += ["insert into super_categoria values (%s);",]
+		for query in queries:
+			cursor.execute(query, data)
+		return queries[-1]
 	except Exception as e:
 		return str(e)
 	finally:
@@ -296,19 +296,39 @@ def remover_categoria():
 		nome_categoria = params.get("nome_categoria")
 		tipo_categoria = params.get("tipo_categoria")
 		data = (nome_categoria,)
+		queries = []
 		if (tipo_categoria == "super"):
-			query1 = "delete from tem_outra where nome_super_categoria = %s;"
-			query2 = "delete from super_categoria where nome_categoria = %s;"
+			queries += ["delete from tem_outra where nome_super_categoria = %s;",]
+			queries += ["delete from super_categoria where nome_categoria = %s;",]
 		else:
-			cursor.execute("delete from tem_categoria where nome_categoria = %s", data)
-			cursor.execute("delete from produto where nome_categoria = %s", data)
-			query1 = "delete from tem_outra where nome_categoria = %s;"
-			query2 = "delete from categoria_simples where nome_categoria = %s;"
-		query3 = "delete from categoria where nome_categoria = %s;"
-		cursor.execute(query1, data)
-		cursor.execute(query2, data)
-		cursor.execute(query3, data)
-		return query3
+			queries += ["delete from tem_categoria where nome_categoria = %s;",]
+			queries += ["delete from produto where nome_categoria = %s;",]
+			queries += ["delete from tem_outra where nome_categoria = %s;",]
+			queries += ["delete from categoria_simples where nome_categoria = %s;",]
+		queries += ["delete from categoria where nome_categoria = %s;",]
+		for query in queries:
+			cursor.execute(query, data)
+		return queries[-1]
+	except Exception as e:
+		return str(e)
+	finally:
+		dbConn.commit()
+		cursor.close()
+		dbConn.close()
+
+@app.route("/adicionar_retalhista", methods = ["POST"])
+def adicionar_retalhista():
+	dbConn = None
+	cursor = None
+	try:
+		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+		tin = request.form["tin"]
+		nome_retalhista = request.form["nome_retalhista"]
+		data = (tin, nome_retalhista)
+		query = "insert into retalhista values (%s, %s)"
+		cursor.execute(query, data)
+		return query
 	except Exception as e:
 		return str(e)
 	finally:
