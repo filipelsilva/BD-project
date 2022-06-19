@@ -360,4 +360,42 @@ def remover_retalhista():
 		cursor.close()
 		dbConn.close()
 
+@app.route("/evento_reposicao_ivm")
+def list_evento_reposicao_ivm():
+	dbConn = None
+	cursor = None
+	try:
+		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+		params = request.args
+		num_serie = params.get("num_serie")
+		data = (num_serie,)
+		query = "select * from evento_reposicao where num_serie = %s;"
+		cursor.execute(query, data)
+		return render_template("evento_reposicao_ivm.html", cursor = cursor, params = request.args)
+	except Exception as e:
+		return str(e)
+	finally:
+		cursor.close()
+		dbConn.close()
+
+@app.route("/subcategorias")
+def list_evento_reposicao_ivm():
+	dbConn = None
+	cursor = None
+	try:
+		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+		cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+		params = request.args
+		num_serie = params.get("num_serie")
+		data = (num_serie,)
+		query = "select * from evento_reposicao where num_serie = %s;"
+		cursor.execute(query, data)
+		return render_template("evento_reposicao_ivm.html", cursor = cursor, params = request.args)
+	except Exception as e:
+		return str(e)
+	finally:
+		cursor.close()
+		dbConn.close()
+
 CGIHandler().run(app)

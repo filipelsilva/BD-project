@@ -2,16 +2,17 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>evento_reposicao</title>
+		<title>evento_reposicao_ivm</title>
 	</head>
 	<body style="padding:20px">
 		{% if cursor %}
 		<table border="2px">
+			<h1>Eventos de reposiçao para a IVM: {{ params.get("num_serie") }}</h1>
 			<thead>
 				<tr>
 					<th>ean</th>
 					<th>num_prateleira</th>
-					<th>num_serie</th>
+					<!-- <th>num_serie</th> -->
 					<th>fabricante</th>
 					<th>instante</th>
 					<th>unidades</th>
@@ -23,7 +24,7 @@
 				<tr>
 					<td>{{ record[0] }}</td>
 					<td>{{ record[1] }}</td>
-					<td>{{ record[2] }}</td>
+					<!-- <td>{{ record[2] }}</td> -->
 					<td>{{ record[3] }}</td>
 					<td>{{ record[4] }}</td>
 					<td>{{ record[5] }}</td>
@@ -32,11 +33,6 @@
 				{% endfor %}
 			</tbody>
 		</table>
-		<h3>Pesquisar por IVM</h3>
-		<form action="evento_reposicao_ivm">
-			<p>Número de série: <input type="text" name="num_serie" required/></p>
-			<p><input type="submit" value="Submit"/></p>
-		</form>
 		{% else %}
 		<p> Erro: ao obter dados da base de dados!</p>
 		{% endif %}
