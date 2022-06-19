@@ -10,8 +10,12 @@
 			<thead>
 				<tr>
 					<th>ean</th>
-					<th></th>
-					<th>Saldo</th>
+					<th>num_prateleira</th>
+					<th>num_serie</th>
+					<th>fabricante</th>
+					<th>instante</th>
+					<th>unidades</th>
+					<th>tin</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -20,6 +24,10 @@
 					<td>{{ record[0] }}</td>
 					<td>{{ record[1] }}</td>
 					<td>{{ record[2] }}</td>
+					<td>{{ record[3] }}</td>
+					<td>{{ record[4] }}</td>
+					<td>{{ record[5] }}</td>
+					<td>{{ record[6] }}</td>
 				</tr>
 				{% endfor %}
 			</tbody>
