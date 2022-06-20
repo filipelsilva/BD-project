@@ -7,23 +7,24 @@
 -- categorias?
 
 -- TODO: problema categorias em IVMs diferentes --
-select name
+-- NOTE (filipe) isto parece funcionar, se bem nao sei
+select nome_retalhista
 from responsavel_por natural join retalhista
-group by name
-having count(distinct nome_cat) >= all (
-    select count(distinct nome_cat)
+group by nome_retalhista
+having count(distinct nome_categoria) >= all (
+    select count(distinct nome_categoria)
     from responsavel_por natural join retalhista
-    group by name
+    group by nome_retalhista
 );
 
 
 -- Qual o nome do ou dos retalhistas que sao responsaveis por todas as categorias simples?
 
 -- TODO: ?? not sure
-select name
+select nome_retalhista
 from responsavel_por natural join retalhista
 group by nome
-having count(distinct nome_cat) = (
+having count(distinct nome_categoria) = (
     select count(*)
     from categoria_simples
 );
