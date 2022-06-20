@@ -389,7 +389,13 @@ def subcategorias():
 		params = request.args
 		nome_categoria = params.get("nome_categoria")
 		data = (nome_categoria,)
-		query = "select * from tem_outra where nome_super_categoria = %s;"
+		query = """
+		with recursive recursivo as (
+			select * from tem_outra where nome_super_categoria = %s
+			union all
+			select tem_outra.nome_super_categoria, tem_outra.nome_categoria from recursivo, tem_outra where recursivo.nome_categoria = tem_outra.nome_super_categoria
+		) select * from recursivo;
+		"""
 		cursor.execute(query, data)
 		return render_template("subcategorias.html", cursor = cursor, params = request.args)
 	except Exception as e:
