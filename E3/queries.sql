@@ -24,7 +24,7 @@ having count(distinct nome_categoria) >= all (
 
 select nome_retalhista
 from responsavel_por natural join retalhista
-group by nome
+group by nome_retalhista
 having count(distinct nome_categoria) = (
     select count(*)
     from categoria_simples
