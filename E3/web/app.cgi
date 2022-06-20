@@ -372,7 +372,7 @@ def list_evento_reposicao_ivm():
 		data = (num_serie,)
 		query = "select * from evento_reposicao where num_serie = %s;"
 		cursor.execute(query, data)
-		return render_template("evento_reposicao_ivm.html", cursor = cursor)
+		return render_template("evento_reposicao_ivm.html", cursor = cursor, params = request.args)
 	except Exception as e:
 		return str(e)
 	finally:
@@ -403,3 +403,5 @@ def subcategorias():
 	finally:
 		cursor.close()
 		dbConn.close()
+
+CGIHandler().run(app)
