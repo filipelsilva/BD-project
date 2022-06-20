@@ -3,7 +3,6 @@
 ## Correr localmente
 
 ```bash
-ln -s ./web cgi-bin
 python3 -m http.server --cgi 8000
 ```
 
