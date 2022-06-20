@@ -1,20 +1,20 @@
 ----------------------------
---         3. SQL         -- 
+--         3. SQL         --
 ----------------------------
 
 
 -- Qual o nome do retalhista (ou retalhistas) responsaveis pela reposicao do maior numero de
--- categorias? 
+-- categorias?
 
 -- TODO: problema categorias em IVMs diferentes --
 select name
 from responsavel_por natural join retalhista
-group by name  
+group by name
 having count(distinct nome_cat) >= all (
     select count(distinct nome_cat)
     from responsavel_por natural join retalhista
     group by name
-);   
+);
 
 
 -- Qual o nome do ou dos retalhistas que sao responsaveis por todas as categorias simples?
@@ -30,7 +30,7 @@ having count(distinct nome_cat) = (
 
 -- Quais os produtos (ean) que nunca foram repostos?
 select ean
-from produto 
+from produto
 where ean not in (
     select ean from evento_reposicao)
 ;
@@ -40,7 +40,7 @@ where ean not in (
 select ean
 from evento_reposicao a
 where not exists(
-    select ean 
+    select ean
     from evento_reposicao
     except
     select b.ean
@@ -52,14 +52,14 @@ where not exists(
 
 
 ----------------------------
---        6. OLAP         -- 
+--        6. OLAP         --
 ----------------------------
 
 -- 1. num dado periodo (i.e. entre duas datas), por dia da semana, por concelho e no total
 -- TODO: falta periodo de tempo. nao sei como fazer com datas desconhecidas
 select dia_semana, conselho, SUM(unidades) as total
 from Vendas
-group by 
+group by
     CUBE(dia_semana,conselho);
 
 -- 2. num dado distrito (i.e. "Lisboa"), por concelho, categoria, dia da semana e no total
