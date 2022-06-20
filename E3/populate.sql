@@ -208,10 +208,10 @@ insert into prateleira values ('1', 'ivm1', 'Apple', '09.5', 'Queijos');
 insert into prateleira values ('2', 'ivm2', 'Marca1', '11.5', 'Manteigas');
 insert into prateleira values ('3', 'ivm3', 'Marca2', '08.5', 'Frutas');
 
-insert into planograma values ('0', '0', 'ivm0', 'Bosch', '1', '2', 'ns1');
-insert into planograma values ('1', '1', 'ivm1', 'Apple', '2', '3', 'ns2');
-insert into planograma values ('2', '2', 'ivm2', 'Marca1', '3', '4', 'ns3');
-insert into planograma values ('3', '3', 'ivm3', 'Marca2', '4', '5', 'ns4');
+insert into planograma values ('0', '0', 'ivm0', 'Bosch', '1', '20', 'ns1');
+insert into planograma values ('1', '1', 'ivm1', 'Apple', '2', '30', 'ns2');
+insert into planograma values ('2', '2', 'ivm2', 'Marca1', '3', '40', 'ns3');
+insert into planograma values ('3', '3', 'ivm3', 'Marca2', '4', '50', 'ns4');
 
 insert into retalhista values ('1', 'Jorge');
 insert into retalhista values ('2', 'Bruno');

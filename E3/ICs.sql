@@ -24,7 +24,7 @@ declare categoria1 varchar;
 declare categoria2 varchar;
 begin
 	select unidades from planograma where ean = new.ean into count_produtos;
-	if new.unidades > unidades then
+	if new.unidades > count_produtos then
 		raise exception 'demasiadas unidades para repor';
 	end if;
 
