@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/usr/bin/python3
 from wsgiref.handlers import CGIHandler
 from flask import Flask
 from flask import render_template, request
@@ -6,7 +6,7 @@ import psycopg2
 import psycopg2.extras
 
 # SGBD configs
-local = True
+local = False
 
 if (local):
 	DB_HOST = "localhost"
