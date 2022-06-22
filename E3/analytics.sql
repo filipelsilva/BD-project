@@ -9,9 +9,9 @@
 
 select dia_semana, concelho, sum(unidades) as total
 from vendas
-where ano >= '2020' and ano <= '2022'
-	and mes >= '1' and mes <= '10'
-	and dia_mes >= '10' and dia_mes <= '31'
+where ano between '2020' and '2022'
+	and mes between '1' and '10'
+	and dia_mes between '10' and '31'
 group by cube(dia_semana, concelho);
 
 -- 2. num dado distrito (i.e. "Lisboa"), por concelho, categoria, dia
