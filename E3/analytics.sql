@@ -5,8 +5,6 @@
 -- 1. num dado periodo (i.e. entre duas datas), por dia da semana,
 -- por concelho e no total
 
--- TODO: falta periodo de tempo. nao sei como fazer com datas desconhecidas
-
 select dia_semana, concelho, sum(unidades) as total
 from vendas
 where ano between '2020' and '2022'
