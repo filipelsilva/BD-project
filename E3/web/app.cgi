@@ -270,7 +270,7 @@ def adicionar_categoria():
 		nome_categoria = request.form["nome_categoria"]
 		tipo_categoria = request.form["tipo_categoria"]
 		data = (nome_categoria,)
-		queries = ["insert into categoria values (%s)",]
+		queries = ["insert into categoria values (%s);",]
 		if (tipo_categoria == "simples"):
 			queries += ["insert into categoria_simples values (%s);",]
 		else:
@@ -326,7 +326,7 @@ def adicionar_retalhista():
 		tin = request.form["tin"]
 		nome_retalhista = request.form["nome_retalhista"]
 		data = (tin, nome_retalhista)
-		query = "insert into retalhista values (%s, %s)"
+		query = "insert into retalhista values (%s, %s);"
 		cursor.execute(query, data)
 		return query
 	except Exception as e:
@@ -347,9 +347,9 @@ def remover_retalhista():
 		tin = params.get("tin")
 		data = (tin,)
 		queries = []
-		queries += ["delete from responsavel_por where tin = %s",]
-		queries += ["delete from evento_reposicao where tin = %s",]
-		queries += ["delete from retalhista where tin = %s",]
+		queries += ["delete from responsavel_por where tin = %s;",]
+		queries += ["delete from evento_reposicao where tin = %s;",]
+		queries += ["delete from retalhista where tin = %s;",]
 		for query in queries:
 			cursor.execute(query, data)
 		return queries[-1]
